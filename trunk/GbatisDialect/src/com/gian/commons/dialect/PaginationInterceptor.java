@@ -77,8 +77,11 @@ public class PaginationInterceptor implements Interceptor
         case MYSQL:
             dialect = new MysqlDialect();
             break;
-        case MSSQL:
-            dialect = new MssqlDialect();
+        case MSSQL58:
+            dialect = new Mssql58Dialect();
+            break;
+        case MSSQL12:
+            dialect = new Mssql12Dialect();
             break;
         default:
             break;
