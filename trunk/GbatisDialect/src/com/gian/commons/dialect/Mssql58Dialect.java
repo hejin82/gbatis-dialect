@@ -30,7 +30,7 @@ public class Mssql58Dialect extends Dialect
         }
 
         pagingSelect.append(sql);
-        pagingSelect.append(" ) d " ).append(order).append(" ) t )tt where temprownumber>").append(offset - 1);
+        pagingSelect.append(" ) d " ).append(order).append(" ) t )tt where temprownumber>=").append(offset);
 
         return pagingSelect.toString();
     }
