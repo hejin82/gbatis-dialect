@@ -1,6 +1,6 @@
 package com.gian.commons.dialect;
 
-public class MssqlDialect extends Dialect
+public class Mssql58Dialect extends Dialect
 {
 
     /*
@@ -19,7 +19,7 @@ public class MssqlDialect extends Dialect
 
         pagingSelect
                 .append("select * from (select row_number()over(order by tempcolumn)temprownumber,* ")
-                .append(" from (select top ").append(limit).append(" tempcolumn=0,* from ( ");
+                .append(" from (select top ").append(offset + limit - 1).append(" tempcolumn=0,* from ( ");
         
         // 暂不支持多排序结果合并查询
         // 判断是否order....结尾, 分页中排序需要拆分sql
@@ -30,15 +30,9 @@ public class MssqlDialect extends Dialect
         }
 
         pagingSelect.append(sql);
-        pagingSelect.append(" ) d " ).append(order).append(" ) t )tt where temprownumber>").append(offset);
+        pagingSelect.append(" ) d " ).append(order).append(" ) t )tt where temprownumber>").append(offset - 1);
 
         return pagingSelect.toString();
-    }
-    
-    public static void main(String[] args)
-    {
-        System.out.println("sfsd order by sdfdsf".substring(0, "sfsd order by sdfdsf".lastIndexOf("order")));
-        System.out.println("sfsd order by sdfdsf".substring("sfsd order by sdfdsf".lastIndexOf("order")));
     }
 
 }
